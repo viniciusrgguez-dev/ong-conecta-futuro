@@ -1,0 +1,363 @@
+:root {
+  /* --- PALETA DE CORES (8 Cores) --- */
+  --primary-color: #2c118d;
+  --primary-light: #2B6CB0;
+  --secondary-color: #319795;
+  --secondary-light: #4FD1C5;
+  --bg-main: #F7FAFC;
+  --card-bg: #FFFFFF;
+  --text-dark: #2D3748;
+  --text-muted: #718096;
+
+  /* --- TIPOGRAFIA --- */
+  --font-h1: 2.25rem;
+  --font-h2: 1.75rem;
+  --font-h3: 1.25rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+
+  /* --- ESPAÇAMENTOS --- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+/* --- REGRAS GLOBAIS --- */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* --- CABEÇALHO E MENU NAVEGAÇÃO --- */
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: var(--space-md) var(--space-lg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Oculta o checkbox do hambúrguer em telas grandes */
+#menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Menu Principal */
+nav ul.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+nav a {
+  color: var(--secondary-light);
+  text-decoration: none;
+  font-weight: bold;
+  padding: var(--space-sm);
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* --- ESTRUTURA DO DROPDOWN (DESKTOP) --- */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primary-color);
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  z-index: 1000;
+  list-style: none;
+  padding: var(--space-xs) 0;
+}
+
+.dropdown-content li a {
+  color: white;
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  font-weight: normal;
+}
+
+.dropdown-content li a:hover {
+  background-color: var(--primary-light);
+}
+
+/* Exibe o submenu ao passar o mouse */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* --- REGRAS MOBILE (MENU HAMBÚRGUER) --- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .menu-icon {
+    display: block; /* Mostra o botão hambúrguer */
+  }
+
+  nav ul.nav-menu {
+    display: none; /* Esconde o menu por padrão no celular */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: var(--space-md) 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Exibe o menu quando o hambúrguer for clicado (checkbox checado) */
+  #menu-toggle:checked ~ nav ul.nav-menu {
+    display: flex;
+  }
+
+  /* --- BOTÕES E ESTADOS INTERATIVOS --- */
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid transparent;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover: Ao passar o mouse */
+.btn:hover {
+  background-color: var(--primary-light);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Focus: Navegação por teclado / Acessibilidade */
+.btn:focus {
+  outline: none;
+  border-color: var(--secondary-light);
+  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.4);
+}
+
+/* Active: Momento do clique */
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Disabled: Botão desativado */
+.btn:disabled {
+  background-color: var(--text-muted);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- FEEDBACK VISUAL DE FORMULÁRIOS --- */
+input, select, textarea {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 2px solid #CBD5E0;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+/* Validação de preenchimento correto */
+input:valid {
+  border-color: #38A169; /* Verde de sucesso */
+}
+
+/* Validação de erro/invalidez ao interagir */
+input:invalid:not(:placeholder-shown) {
+  border-color: #e90000; /* Vermelho de erro */
+}
+
+  .dropdown-content {
+    position: static; /* No mobile, o submenu fica dentro do fluxo normal */
+    box-shadow: none;
+    background-color: var(--primary-light);
+  }
+}
+
+/* --- SISTEMA DE GRID DE 12 COLUNAS (MOBILE-FIRST) --- */
+main {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-md);
+  max-width: 1200px;
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-md);
+}
+
+/* Em telas pequenas (Mobile), cada seção ocupa as 12 colunas */
+section {
+  grid-column: span 12;
+  background-color: var(--card-bg);
+  padding: var(--space-lg);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+h2 {
+  color: var(--primary-color);
+  font-size: var(--font-h2);
+  margin-top: 0;
+}
+
+.img-banner {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: var(--space-md);
+  display: block;
+}
+
+footer {
+  text-align: center;
+  padding: var(--space-md);
+  background-color: var(--primary-color);
+  color: white;
+  font-size: var(--font-small);
+}
+
+/* --- 5 BREAKPOINTS RESPONSIVOS (@media) --- */
+
+/* 1. Mobile Extra Small / Base: já definido acima (12 colunas adaptadas) */
+
+/* 2. Mobile Large (>= 576px) */
+@media (min-width: 576px) {
+  body {
+    font-size: 1.05rem;
+  }
+}
+
+/* 3. Tablets (>= 768px) */
+@media (min-width: 768px) {
+  /* Em tablets, dividimos seções em 6 colunas cada se houver mais de uma */
+  #apresentacao {
+    grid-column: span 12;
+  }
+  #contato {
+    grid-column: span 12;
+  }
+}
+
+/* 4. Desktops / Laptops (>= 992px) */
+@media (min-width: 992px) {
+  /* No desktop, a apresentação ocupa 8 colunas e o contato ocupa 4 colunas */
+  #apresentacao {
+    grid-column: span 8;
+  }
+  #contato {
+    grid-column: span 4;
+  }
+}
+
+/* 5. Desktops Panorâmicos / Ultra-wide (>= 1200px) */
+@media (min-width: 1200px) {
+  main {
+    padding: 0;
+  }
+}
+img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: var(--space-md);
+    display: block;
+}
+/* --- COMPONENTES DE FEEDBACK VISUAL --- */
+
+/* 1. Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: var(--font-small);
+  font-weight: bold;
+  margin-right: 6px;
+}
+.badge-primary { background-color: var(--primary-light); color: white; }
+.badge-success { background-color: #38A169; color: white; }
+.badge-warning { background-color: #DD6B20; color: white; }
+
+/* 2. Alertas */
+.alert {
+  padding: var(--space-md);
+  border-radius: 6px;
+  margin: var(--space-md) 0;
+  border-left: 5px solid;
+}
+.alert-info {
+  background-color: #EBF8FF;
+  border-color: #3182CE;
+  color: #2B6CB0;
+}
+
+/* 3. Toast (Notificação não obstrutiva) */
+.toast {
+  padding: var(--space-md);
+  border-radius: 6px;
+  background-color: #2F855A;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* 4. Modal (Demonstração Estrutural) */
+.modal-demo {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: var(--space-lg);
+  border-radius: 8px;
+}
+.modal-content {
+  background-color: var(--card-bg);
+  padding: var(--space-lg);
+  border-radius: 8px;
+  max-width: 400px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+.modal-content h4 { margin-top: 0; color: var(--primary-color); }
+
+/* --- SUPORTE AO MODO ESCURO (GERENCIADO VIA JS) --- */
+body.dark-mode {
+  --bg-main: #0F172A;
+  --card-bg: #1E293B;
+  --text-dark: #F8FAFC;
+  --text-muted: #94A3B8;
+}
+
+body.dark-mode .modal-content {
+  background-color: #1E293B;
+  color: #F8FAFC;
+}
